@@ -1,0 +1,35 @@
+### Download and install Xampp for PHP. 
+*** Give environment variable (System Variable) for XAMPP\PHP.
+
+
+### Uncomment and replace $document_root in nginx.conf
+*** $document_root$fastcgi_script_name;
+root c:/www;
+location ~ \.php$ {
+    fastcgi_pass   127.0.0.1:9000;
+    fastcgi_index  index.php;
+    fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+    include        fastcgi_params;
+}
+
+
+### Download Nginx
+https://nginx.org/en/download.html
+
+## Run Nginx
+start nginx
+tasklist /fi "imagename eq nginx.exe"
+---- Note!!! php-cgi.exe port and fastcgi_pass port must be same.
+
+## Nginx Commands
+nginx/Windows runs as a standard console application (not a service), 
+and it can be managed using the following commands:
+
+nginx -help	search for help
+nginx -s stop	fast shutdown
+nginx -s quit	graceful shutdown
+nginx -s reload	changing configuration, starting new worker processes with a new configuration, graceful shutdown of old worker processes
+nginx -s reopen	re-opening log files
+
+## Stop all nginx processes
+taskkill /F /IM nginx.exe
